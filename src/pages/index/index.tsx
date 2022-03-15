@@ -25,8 +25,27 @@ const source = [
 const Index = () => {
   const [data, setData] = useState(source);
   
+  
   usePageEvent('onShow', () => {
-    setData(source);
+    
+    const newSource = [
+      {
+        id: 1,
+        title: '标题1',
+        subTitle: '子标题1'
+      },
+      {
+        id: 2,
+        title: '标题2',
+        subTitle: '子标题2'
+      },
+      {
+        id: 3,
+        title: '标题4',
+        subTitle: '子标题4'
+      },
+    ]
+    setData(newSource);
   })
   
   return (

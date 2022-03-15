@@ -22,9 +22,11 @@ const Tabs: React.FC = (props) => {
   } else {
     w = 23
   }
-
+  
+  console.log('页面刷新了')
+  
   const handleChange = (index: number) => {
-    console.log(activeRef.current)
+    console.log('activeRef -> ', activeRef.current)
     if (index === activeRef.current) return;
     headRefs.current[index]?.setData({
       className: `${styles.svItem} ${styles.active}`,
@@ -58,7 +60,7 @@ const Tabs: React.FC = (props) => {
                       return headRefs.current[index] = ref
                     }}
                     initData={{
-                      className: `${styles.svItem} ${index === 0 && styles.active}`,
+                      className: `${styles.svItem} ${index === activeRef.current && styles.active}`,
                       style:  `width: ${w}vw`
                     }}
                     onTap={() => handleChange(index)}
@@ -84,7 +86,7 @@ const Tabs: React.FC = (props) => {
                 ref={ref => ctnRefs.current[index] = ref}
                 key={`tab-body-${index}`}
                 initData={{
-                  visible: index === 0
+                  visible: index === activeRef.current
                 }}
               >{(child as React.ReactElement).props.children}</Native>
             )
