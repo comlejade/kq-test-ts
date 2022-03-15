@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {View} from "@remax/wechat";
 import { Button } from '@kqinfo/ui';
 import Tabs from '@/components/tabs/tabs';
 import Tab from '@/components/tab/tab';
 import {usePageEvent} from "remax/macro";
+import useStore from '@/store';
 
 const source = [
   {
@@ -24,8 +25,14 @@ const source = [
 ]
 const Index = () => {
   const [data, setData] = useState(source);
-  
-  
+  const { locationStore } = useStore();
+
+  const previousRef = useRef(0);
+
+  usePageEvent('onLoad', () => {
+    previousRef.current = locationStore.storeId
+  })
+
   usePageEvent('onShow', () => {
     
     const newSource = [
@@ -45,7 +52,10 @@ const Index = () => {
         subTitle: '子标题4'
       },
     ]
-    setData(newSource);
+    if (previousRef.current && previousRef.current !== locationStore.storeId) {
+      setData(newSource)
+      previousRef.current = locationStore.storeId
+    }
   })
   
   return (

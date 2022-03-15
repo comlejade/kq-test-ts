@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
-class Store {
-  storeId = 0;
+class Location {
+  storeId = 1;
   
   constructor() {
     makeAutoObservable(this)
@@ -12,4 +12,4 @@ class Store {
   }
 }
 
-export default Store;
+export default Location;
